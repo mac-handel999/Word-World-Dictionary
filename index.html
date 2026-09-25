@@ -2,84 +2,70 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word World || Cybernetic Splash</title>
 
-  <title> 
-  word world dictionary/splash-screen
-  </title>
-  
-  <!-- HTML -->
-  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- AOS Animation Library CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
   <!-- Custom Styles -->
   <link rel="stylesheet" href="style.css">
-  
-  <link rel="icon" type="png" href=" images/logo-img.png">
+  <link rel="icon" type="image/png" href="images/logo-img.png">
 </head>
 
 <body>
- <div class="container">
-   <div class="splash-logo">
-     <span class="logo-icon">
-       <img src=" images/logo-img.png " alt="logo image" width="200px" height="200px" class="logo-img">
-     </span><br>
-     
-     <br>
-     <h2 style="font-size: 1.2rem; color: #3b82f6;">
-       
-       <br>
-         <b>
-           Word World Dictionary
-         </b>
-       
-     </h4>
-     
-   </div>
-   
-   <div class="button-section">
-     <span class="dic">
-       <a href=" dictionary.html">
-         <button class="bio-btn">
-         <b>Search Words</b>
-         </button>
-       </a>
-     </span><br>
-     
-   </div>
-     
+  <!-- Ambient Neon Background Effect -->
+  <div class="glow-bg"></div>
+
+  <!-- Central Card Layout -->
+  <main class="splash-card" data-aos="zoom-in" data-aos-duration="1000">
     
- <span class="for">
-   <p>
-     <b>
-       <small>
-         FOR: All Students👩‍🎓 , FUTO
-         & FUTO Students Community
-       </small>
-     </b>
-   </p>
- </span>
- <br />
- 
- <footer class="footer">
-  
- 
-   <p><small> <b>
-   BY:  {FABIAN CODES HQ 👨‍💻  (CYB-FUTO) }
- </b> </small></p><br>
- 
-    
-    <br>
-    <p>
-     <small>
-       &copy;2025 || Word World
-       Dictionary
-     </small>
-   </p>
- </footer>
- 
- 
-  <!-- Project -->
-  <script src="main.js"></script>
+    <!-- Branding Header -->
+    <div class="splash-logo" data-aos="fade-down" data-aos-delay="200">
+      <div class="logo-wrapper">
+        <img src="images/logo-img.png" alt="Word World Logo" class="logo-img" onerror="this.style.display='none'">
+      </div>
+      <h1 class="brand-title">WORD<span class="highlight">WORLD</span></h1>
+      <p class="cyber-badge">&gt; Cybernetic Lexicon Engine_</p>
+    </div>
+
+    <!-- Action Section -->
+    <div class="button-section" data-aos="fade-up" data-aos-delay="400">
+      <a href="dictionary.html" class="nav-link">
+        <button class="cyber-btn">
+          <span>SEARCH WORDS &rarr;</span>
+        </button>
+      </a>
+    </div>
+
+    <!-- Audience Tagline -->
+    <div class="audience-tag" data-aos="fade-up" data-aos-delay="600">
+      <p>
+        <span class="icon">🎓</span> FOR: All Students, FUTO &amp; FUTO Students Community
+      </p>
+    </div>
+
+  </main>
+
+  <!-- Footer Info -->
+  <footer class="footer" data-aos="fade-up" data-aos-delay="800">
+    <p class="author">&gt; BY: <span class="brand">{FABIAN CODES HQ 👨‍💻 (CYB-FUTO)}</span></p>
+    <p class="copyright">&copy; 2026 || Word World Cybernetic Dictionary</p>
+  </footer>
+
+  <!-- AOS Animation Script -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      once: true,
+      duration: 800
+    });
+  </script>
 </body>
 </html>

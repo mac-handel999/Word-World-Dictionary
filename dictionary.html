@@ -2,86 +2,83 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word World || Cyber Dictionary</title>
 
-  <title>Dictionary App.js/Word-World</title>
-  
-  <!-- HTML -->
-  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- AOS Animation Library CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
   <!-- Custom Styles -->
   <link rel="stylesheet" href="dictionary.css">
 </head>
 
 <body>
-  <header class="logo">
-   <span class="logo-icon">
-   <img src=" images/logo-img.png " alt="logo image" width="140px" height="140px" class="logo-img">
- </span><br>
-  </header>
-  
-  <div class="container">
-    <div class="search-bar">
-      <input type="text" id="text-input" class="input" placeholder="Enter a word">
-      
-      <button class="search-btn">
-        🔎
-      </button>
-       
+  <!-- Header / Branding -->
+  <header class="header" data-aos="fade-down" data-aos-duration="1000">
+    <div class="logo-wrapper">
+      <img src="images/logo-img.png" alt="Word World Logo" class="logo-img" onerror="this.style.display='none'">
+      <h1 class="glitch-title">WORD<span class="highlight">WORLD</span></h1>
     </div>
-   
-   <br>
-    <div class="text-body">
-    
-  
-  
+    <p class="tagline">&gt; Cybernetic Lexicon Engine_</p>
+  </header>
 
-    </div><br>
-  
-  </div>
-  
-  <br>
-  <footer class="footer">
-    <p class="text-1">
-      <b>
-        <small>
-        By: {Fabian Codes HQ}
- 
-    
-    </b>
-    </p><br>
-    <hr>
-    
-    <br>
-    <p><b> Dictionary API URL(GitHub Repo): <br>
-    </b>
-     <a href="https://dictionaryapi.dev/ ">
-      https://dictionaryapi.dev/
-      </a>
-    </p>
-    
-     <br>
-    <p><b> Dictionary  API URL(Project API): <br></b>
-    <a href="https://api.dictionaryapi.dev/api/v2/entries/en/">
+  <!-- Main Application Container -->
+  <main class="container" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
+    <!-- Search Bar Section -->
+    <div class="search-box">
+      <input type="text" id="text-input" class="input" placeholder="Type a word to query..." autocomplete="off">
+      <button class="search-btn" aria-label="Search word">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Output Body -->
+    <div class="text-body" id="text-body">
+      <div class="idle-state">
+        <p>&gt; System ready. Enter a search term above to execute query.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer" data-aos="fade-up" data-aos-duration="1000">
+    <div class="footer-content">
+      <p class="author">&gt; Built by: <span class="brand">{Fabian Codes HQ}</span></p>
       
-     https://api.dictionaryapi.dev<br>/api/v2/entries/en/.
-      </a>
-    </p>
-    
-    
-    
-    <br>
-  <p class="text-2"><small>&copy;2025 || Word World Dictionary</small></p>
-  
-  
-  </small>
+      <div class="api-links">
+        <p>
+          <strong>GitHub Repo API:</strong> 
+          <a href="https://dictionaryapi.dev/" target="_blank" rel="noopener noreferrer">dictionaryapi.dev</a>
+        </p>
+        <p>
+          <strong>Endpoint Base:</strong> 
+          <a href="https://api.dictionaryapi.dev/api/v2/entries/en/" target="_blank" rel="noopener noreferrer">api.dictionaryapi.dev</a>
+        </p>
+      </div>
+
+      <p class="copyright">&copy; 2026 || Word World Cybernetic Dictionary</p>
+    </div>
   </footer>
 
-  
-  
-  
-  <!-- Project -->
+  <!-- AOS Animation Script -->
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      once: true,
+      duration: 800
+    });
+  </script>
+
+  <!-- Application Script -->
   <script src="main.js"></script>
 </body>
 </html>
