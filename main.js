@@ -2,83 +2,100 @@ const btn = document.querySelector('.search-btn');
 const textBody = document.querySelector('.text-body');
 const url = "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
-let sound = document.querySelector('.word-sound'); // Define sound here so it can be accessed later
+let sound = null;
 
 btn.addEventListener('click', () => {
-  let textIn = document.querySelector('.input').value;
+  const textIn = document.querySelector('.input').value.trim();
 
-  fetch(`${url}${textIn}`)
-    .then((response) => response.json())
+  if (!textIn) {
+    textBody.innerHTML = `<p style="text-align: center;">Please enter a word to search.</p>`;
+    return;
+  }
+
+  fetch(`${url}${encodeURIComponent(textIn)}`)
+    .then((response) => {
+      // Handles 404 (Word not found) without throwing a JavaScript error exception
+      if (response.status === 404) {
+        return null;
+      }
+      if (!response.ok) {
+        throw new Error(`Server status: ${response.status}`);
+      }
+      return response.json();
+    })
     .then((data) => {
-      if (data && data[0]) {
-        const wordData = data[0];
-        const meaning = wordData.meanings[0];
-        const definition = meaning.definitions[0];
-        const phoneticAudio = wordData.phonetics[0]?.audio || ''; // Get the audio source
+      // If 404 occurred or empty array was returned
+      if (!data || !Array.isArray(data) || data.length === 0) {
+        textBody.innerHTML = `<p style="text-align: center;">No results found for "${textIn}".</p>`;
+        return;
+      }
 
-        textBody.innerHTML = `
-        <div class="word-div">
-          <h3 class="word-text">${textIn}</h3>
-          
-          <button onclick="playSound()" class="word-sound">
+      const wordData = data[0];
+      
+      // Extract definitions safely
+      const meaning = wordData.meanings?.[0] || {};
+      const definitionObj = meaning.definitions?.[0] || {};
+      const partOfSpeech = meaning.partOfSpeech || 'N/A';
+      const definition = definitionObj.definition || 'No definition available.';
+      const example = definitionObj.example || 'No example available.';
+      
+      // Search for audio entry across all phonetics arrays
+      const phoneticObj = wordData.phonetics?.find(p => p.audio && p.audio.trim() !== '') || {};
+      const phoneticText = wordData.phonetic || wordData.phonetics?.find(p => p.text)?.text || '??';
+      const phoneticAudio = phoneticObj.audio || '';
+
+      textBody.innerHTML = `
+      <div class="word-div">
+        <h3 class="word-text">${wordData.word || textIn}</h3>
+        
+        <button onclick="playSound()" class="word-sound">
           🔊
-          </button>
-          </div><br>
+        </button>
+      </div><br>
+        
+      <label>Part Of Speech / Phonetics:</label>
+      <br><br>
+      <p class="part-of">
+        <small> ${partOfSpeech} / 
+          <span class="sign-text"> ${phoneticText}</span> / 
+        </small>
+      </p><br>
+      
+      <label>Meaning:</label>
+      <br><br>
+      <p class="meaning">${definition}</p><br>
+      
+      <label>Example:</label>
+      <br><br>
+      <p class="sentence">
+        <small>${example}</small>
+      </p><br>
           
-          <label>Part Of Speech / Phonetics:</label>
-          <br>
-          
-          <br>
-          <p class="part-of">
-            <small> ${meaning.partOfSpeech} / 
-              <span class="sign-text"> ${wordData.phonetic || '??'}</span> / 
-            </small>
-          </p><br>
-          
-          <label>Meaning:</label>
-          <br>
-          
-          <br>
-          <p class="meaning">  ${definition.definition}</p><br>
-          
-          <label>Example:</label>
-          <br>
-          
-          <br>
-          <p class="sentence">
-            <small> ${definition.example || "No example available."}</small>
-          </p><br>
-              
-        <hr><br>
-        <p class="text-2" style="text-align: center;"><small class="search-bar">
-          {Mac Handel Fabian Codes/}.
-          </small>
-        </p>
-        <br>
-        `;
+      <hr><br>
+      <p class="text-2" style="text-align: center;">
+        <small class="search-bar">{Mac Handel Fabian Codes/}.</small>
+      </p>
+      <br>`;
 
-        if (phoneticAudio) {
-          // If the audio exists, create or select the audio element and set its source
-          sound = new Audio(phoneticAudio);
-        } else {
-          // If no audio exists, set sound to null or show a message
-          sound = null;
-          //("No audio available for this word.");
-        }
+      // Attach audio if present
+      if (phoneticAudio) {
+        sound = new Audio(phoneticAudio);
       } else {
-        textBody.innerHTML = `<p>No results found for "${textIn}".</p>`;
+        sound = null;
       }
     })
-    .catch(error => {
-      console.error('Error fetching the dictionary data:', error);
-      textBody.innerHTML = `<p>Something went wrong. Please try again later.</p>`;
+    .catch((error) => {
+      // Catch handles real network dropouts/failures (e.g., disconnected internet)
+      console.error('Network or system error:', error.message);
+      textBody.innerHTML = `<p style="text-align: center;">Unable to connect to service. Check your internet connection.</p>`;
     });
 });
 
 function playSound() {
-   if (sound) {
-     sound.play();
-   } else {
-     alert("No sound available to play.");
-   }
+  if (sound) {
+    sound.play().catch((err) => console.error("Audio playback error:", err));
+  } else {
+    alert("No audio available for this word.");
+  }
 }
+
