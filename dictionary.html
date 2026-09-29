@@ -16,6 +16,7 @@
 
   <!-- Custom Styles -->
   <link rel="stylesheet" href="dictionary.css">
+  <link rel="icon" type="image/png" href="images/logo-img.png">
 </head>
 
 <body>
@@ -32,7 +33,7 @@
   <main class="container" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="200">
     <!-- Search Bar Section -->
     <div class="search-box">
-      <input type="text" id="text-input" class="input" placeholder="Type a word to query..." autocomplete="off">
+      <input type="text" id="text-input" class="input" placeholder="Type a word to query..." autocomplete="off" spellcheck="false">
       <button class="search-btn" aria-label="Search word">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="8"></circle>
@@ -41,10 +42,19 @@
       </button>
     </div>
 
+    <!-- Utility Row -->
+    <div class="utility-row">
+      <button class="ghost-btn random-btn" type="button" title="Look up a random word">
+        <span>&gt; random word</span>
+      </button>
+      <div class="history-row" aria-label="Recent searches"></div>
+    </div>
+
     <!-- Output Body -->
     <div class="text-body" id="text-body">
       <div class="idle-state">
         <p>&gt; System ready. Enter a search term above to execute query.</p>
+        <p class="hint">Results merge Wiktionary, Datamuse and dictionaryapi.dev. No API key needed.</p>
       </div>
     </div>
   </main>
@@ -56,12 +66,16 @@
       
       <div class="api-links">
         <p>
-          <strong>GitHub Repo API:</strong> 
-          <a href="https://dictionaryapi.dev/" target="_blank" rel="noopener noreferrer">dictionaryapi.dev</a>
+          <strong>Lexicon data:</strong>
+          <a href="https://en.wiktionary.org/" target="_blank" rel="noopener noreferrer">Wiktionary (MediaWiki API)</a>
         </p>
         <p>
-          <strong>Endpoint Base:</strong> 
-          <a href="https://api.dictionaryapi.dev/api/v2/entries/en/" target="_blank" rel="noopener noreferrer">api.dictionaryapi.dev</a>
+          <strong>Related words:</strong>
+          <a href="https://www.datamuse.com/" target="_blank" rel="noopener noreferrer">Datamuse</a>
+        </p>
+        <p>
+          <strong>Primary API:</strong>
+          <a href="https://dictionaryapi.dev/" target="_blank" rel="noopener noreferrer">dictionaryapi.dev</a>
         </p>
       </div>
 
